@@ -9,36 +9,34 @@ import (
 	"runtime"
 
 	"github.com/fatih/color"
+	"github.com/joho/godotenv"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
-	"google.golang.org/api/calendar/v3"
 )
-
-const credentialPath = "cred.json"
 
 var tokenStash string
 
 func GetClient() (*http.Client, error) {
 	getOS()
-	
-	credentialsB, err := os.ReadFile(credentialPath)
-	
-	
-	if err != nil {
-		return nil, err
-	}
 
-	config, err := google.ConfigFromJSON(credentialsB, calendar.CalendarReadonlyScope)
+	godotenv.Load()
 
-	config.Scopes = []string{
-		"https://www.googleapis.com/auth/userinfo.email",
-		"https://www.googleapis.com/auth/userinfo.profile",
-		"https://www.googleapis.com/auth/calendar",
-		"openid",
-	}
+	clientID := os.Getenv("ID")
+	clientSecret := os.Getenv("SECRET")
+	redirectURL := os.Getenv("URL")
 
-	if err != nil {
-		return nil, err
+	config := &oauth2.Config{
+		ClientID:     clientID,
+		ClientSecret: clientSecret,
+		RedirectURL:  redirectURL,
+		Scopes: []string{
+			"https://www.googleapis.com/auth/userinfo.email",
+			"https://www.googleapis.com/auth/userinfo.profile",
+			"https://www.googleapis.com/auth/calendar",
+			"openid",
+		},
+
+		Endpoint: google.Endpoint,
 	}
 
 	token, err := getToken(config)
@@ -53,7 +51,6 @@ func GetClient() (*http.Client, error) {
 }
 
 func getToken(config *oauth2.Config) (*oauth2.Token, error) {
-	
 
 	stashedToken, err := getStashedToken()
 	if err != nil {
