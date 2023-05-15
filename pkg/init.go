@@ -8,6 +8,7 @@ import (
 	"os"
 	"runtime"
 
+	"github.com/fatih/color"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/calendar/v3"
@@ -46,7 +47,7 @@ func GetClient() (*http.Client, error) {
 	}
 
 	client := config.Client(context.Background(), token)
-	fmt.Println("Oauth Success")
+	color.Green("Oauth Success")
 	return client, nil
 
 }
@@ -92,7 +93,8 @@ func stashToken(token *oauth2.Token) error {
 func getNewToken(config *oauth2.Config) (*oauth2.Token, error) {
 
 	authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
-	fmt.Printf("Go to the following link in your browser then type the authorization code: \n%v\n", authURL)
+	color.Yellow("Go to the following link in your browser then type the authorization code: ")
+	fmt.Println(authURL)
 
 	var authCode string
 
