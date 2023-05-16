@@ -10,7 +10,7 @@ import (
 	"google.golang.org/api/option"
 )
 
-func UpdateEvent() {
+func UpdateEvent(title string,start string,end string,desc string,colorId string) {
 	client, err := GetClient()
 	if err != nil {
 		return
@@ -37,11 +37,27 @@ func UpdateEvent() {
 
 	for _, event := range events.Items {
 
-		event.Start = &calendar.EventDateTime{
-			DateTime: newStartTime.Format(time.RFC3339),
+		if (start!="" && end!=""){
+			event.Start = &calendar.EventDateTime{
+				DateTime: newStartTime.Format(time.RFC3339),
+			}
+			event.End = &calendar.EventDateTime{
+				DateTime: newEndTime.Format(time.RFC3339),
+			}
+		}else if start!="" && end=="" {
+			event.Start = &calendar.EventDateTime{
+				DateTime: newStartTime.Format(time.RFC3339),
+			}
+			event.End = &calendar.EventDateTime{
+				DateTime: newStartTime.Add(1*time.Hour).Format(time.RFC3339),
+			}
 		}
-		event.End = &calendar.EventDateTime{
-			DateTime: newEndTime.Format(time.RFC3339),
+
+		if desc!=""{
+			event.Description = desc
+		}
+		if colorId!=""{
+			event.ColorId = colorId
 		}
 
 		_, err := srv.Events.Update("primary", event.Id, event).Do()
