@@ -17,6 +17,7 @@ google calendar by passing title as argument`,
 		title := args[0]
 		pkg.DeleteEvent(title)
 	},
+	Example: `chronx delete "Visit park"`,
 }
 
 func init() {
