@@ -5,6 +5,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var list string
+
 
 var listCmd = &cobra.Command{
 	Use:   "list",
@@ -12,12 +14,19 @@ var listCmd = &cobra.Command{
 	Long: `This command is used to list the avaliable 
 events of the user's google calendar`,
 	Run: func(cmd *cobra.Command, args []string) {
-		pkg.GetEvents()
+		if list==""{
+
+			pkg.GetEvents()
+
+		}else{
+			pkg.GetOneEvent(list)
+		}
 	},
 }
 
 func init() {
 	
 	rootCmd.AddCommand(listCmd)
+	listCmd.PersistentFlags().StringVarP(&list, "list", "l", "", "view detailed info of a event")
 
 }
