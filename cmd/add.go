@@ -18,7 +18,7 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add new event to user's calendar",
 	Long: `Chronx add command is used to create new events in google calendar
-	by passing arguments like Title, description, start time, end time, event links etc`,
+by passing arguments like Title, description, start time, end time, event links etc`,
 	Run: func(cmd *cobra.Command, args []string) {
 		
 		pkg.AddEvent(title,description,colorId,start,end)
