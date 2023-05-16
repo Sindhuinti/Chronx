@@ -30,8 +30,6 @@ func AddEvent(title string, description string, colorId string,start string, end
 	endTime, err2 := time.Parse("2006-01-02 15:04:05", end)
 
 	if(err1 !=nil && err2 !=nil){
-		fmt.Println(err1)
-		fmt.Println(err2)
 		fmt.Println("Please enter correct time format")
 		return
 	}
