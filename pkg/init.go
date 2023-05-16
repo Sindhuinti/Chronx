@@ -19,7 +19,12 @@ var tokenStash string
 func GetClient() (*http.Client, error) {
 	getOS()
 
-	godotenv.Load()
+	err:=godotenv.Load()
+	if err!=nil{
+		fmt.Println(err)
+		return nil,err
+
+	}
 
 	clientID := os.Getenv("ID")
 	clientSecret := os.Getenv("SECRET")
@@ -45,7 +50,7 @@ func GetClient() (*http.Client, error) {
 	}
 
 	client := config.Client(context.Background(), token)
-	color.Green("Oauth Success")
+	
 	return client, nil
 
 }

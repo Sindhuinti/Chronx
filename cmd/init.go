@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	//"fmt"
 
 	"github.com/Sindhuinti/chronx/pkg"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,12 @@ var initCmd = &cobra.Command{
 	Args:                  cobra.ExactArgs(0),
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
-		pkg.GetClient()
+		_,err := pkg.GetClient()
+		if err!=nil{
+			color.Red(err.Error())
+			return
+		}
+		color.Green("Oauth Success")
 
 	},
 }
