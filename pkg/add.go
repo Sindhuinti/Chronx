@@ -21,13 +21,23 @@ func AddEvent(title string, description string, colorId string,start string, end
 		log.Fatalf("Unable to create Calendar service: %v", err)
 	}
 
-	if(start=="" || end==""){
-		fmt.Println("Please enter start and end time")
+	var startTime,endTime time.Time
+	var err1,err2 error
+	if(start=="" && end!=""){
+		fmt.Println("Please enter start time")
 		return
+	}else if(start!="" && end==""){
+		startTime, err1 := time.Parse("2006-01-02 15:04:05", start)
+		if err1!=nil{
+			fmt.Println("Please enter correct time")
+			return
+		}
+		endTime = startTime.Add(1*time.Hour)
+	}else{
+
+		startTime, err1 = time.Parse("2006-01-02 15:04:05", start)
+		endTime, err2 = time.Parse("2006-01-02 15:04:05", end)
 	}
-	
-	startTime, err1 := time.Parse("2006-01-02 15:04:05", start)
-	endTime, err2 := time.Parse("2006-01-02 15:04:05", end)
 
 	if(err1 !=nil && err2 !=nil){
 		fmt.Println("Please enter correct time format")
