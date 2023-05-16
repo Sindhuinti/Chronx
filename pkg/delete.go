@@ -20,7 +20,6 @@ func DeleteEvent(title string) {
 		log.Fatalf("Unable to create Calendar service: %v", err)
 	}
 
-
 	events, err := srv.Events.List("primary").Q(title).Do()
 	if err != nil {
 		log.Fatalf("Unable to retrieve events: %v", err)

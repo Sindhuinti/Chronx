@@ -1,11 +1,9 @@
 package cmd
 
 import (
-
 	"github.com/Sindhuinti/chronx/pkg"
 	"github.com/spf13/cobra"
 )
-
 
 var deleteCmd = &cobra.Command{
 	Use:   "delete",

@@ -7,18 +7,17 @@ import (
 
 var list string
 
-
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Get list of events from user's calendar",
 	Long: `This command is used to list the avaliable 
 events of the user's google calendar`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if list==""{
+		if list == "" {
 
 			pkg.GetEvents()
 
-		}else{
+		} else {
 			pkg.GetOneEvent(list)
 		}
 	},
@@ -27,7 +26,7 @@ chronx list -l "Visit park`,
 }
 
 func init() {
-	
+
 	rootCmd.AddCommand(listCmd)
 	listCmd.PersistentFlags().StringVarP(&list, "list", "l", "", "view detailed info of a event")
 

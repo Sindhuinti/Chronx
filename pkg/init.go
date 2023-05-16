@@ -19,10 +19,10 @@ var tokenStash string
 func GetClient() (*http.Client, error) {
 	getOS()
 
-	err:=godotenv.Load()
-	if err!=nil{
+	err := godotenv.Load()
+	if err != nil {
 		fmt.Println(err)
-		return nil,err
+		return nil, err
 
 	}
 
@@ -50,7 +50,7 @@ func GetClient() (*http.Client, error) {
 	}
 
 	client := config.Client(context.Background(), token)
-	
+
 	return client, nil
 
 }

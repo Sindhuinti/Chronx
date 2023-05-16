@@ -26,7 +26,7 @@ func GetEvents() {
 
 	events, err := srv.Events.List("primary").ShowDeleted(false).
 		SingleEvents(true).TimeMin(startTime.Format(time.RFC3339)).TimeMax(endTime.Format(time.RFC3339)).Do()
-	if err !=nil{
+	if err != nil {
 		log.Fatalf("Unable to retrieve events: %v", err)
 	}
 
@@ -39,13 +39,11 @@ func GetEvents() {
 			if err != nil {
 				log.Fatalf("Unable to parse start time: %v", err)
 			}
-			
-    	
+
 			fmt.Printf("%v - %s\n", event.Summary, start.Format("15:04"))
 		}
 	}
 }
-
 
 func GetOneEvent(list string) {
 	client, err := GetClient()
@@ -67,16 +65,16 @@ func GetOneEvent(list string) {
 
 	for _, event := range events.Items {
 		fmt.Println("Title: ", event.Summary)
-		if event.Description!=""{
+		if event.Description != "" {
 
 			fmt.Println("- Description: ", event.Description)
 		}
 		start, _ := time.Parse(time.RFC3339, event.Start.DateTime)
 		fmt.Println("- Start time: ", start.Format("15:04"))
-		if event.HangoutLink!=""{
+		if event.HangoutLink != "" {
 			fmt.Println("- MeetLink: ", event.HangoutLink)
 		}
-		if event.Location!=""{
+		if event.Location != "" {
 
 			fmt.Println("- Location: ", event.Location)
 		}

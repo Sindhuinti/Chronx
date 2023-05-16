@@ -10,7 +10,7 @@ import (
 	"google.golang.org/api/option"
 )
 
-func AddEvent(title string, description string, colorId string,start string, end string) {
+func AddEvent(title string, description string, colorId string, start string, end string) {
 	client, err := GetClient()
 	if err != nil {
 		return
@@ -21,25 +21,24 @@ func AddEvent(title string, description string, colorId string,start string, end
 		log.Fatalf("Unable to create Calendar service: %v", err)
 	}
 
-	var startTime,endTime time.Time
-	var err1,err2 error
-	if(start=="" && end!=""){
+	var startTime, endTime time.Time
+	var err1, err2 error
+	if start == "" && end != "" {
 		fmt.Println("Please enter start time")
 		return
-	}else if(start!="" && end==""){
-		startTime, err1 := time.Parse("2006-01-02 15:04:05", start)
-		if err1!=nil{
+	} else if start != "" && end == "" {
+		startTime, err1 = time.Parse("2006-01-02 15:04:05", start)
+		if err1 != nil {
 			fmt.Println("Please enter correct time")
 			return
 		}
-		endTime = startTime.Add(1*time.Hour)
-	}else{
-
+		endTime = startTime.Add(1 * time.Hour)
+	} else {
 		startTime, err1 = time.Parse("2006-01-02 15:04:05", start)
 		endTime, err2 = time.Parse("2006-01-02 15:04:05", end)
 	}
 
-	if(err1 !=nil && err2 !=nil){
+	if err1 != nil && err2 != nil {
 		fmt.Println("Please enter correct time format")
 		return
 	}
@@ -53,10 +52,9 @@ func AddEvent(title string, description string, colorId string,start string, end
 		End: &calendar.EventDateTime{
 			DateTime: time.Date(endTime.Year(), endTime.Month(), endTime.Day(), endTime.Hour(), endTime.Minute(), endTime.Second(), 0, time.Now().Location()).Format(time.RFC3339),
 		},
-		ColorId:colorId,
+		ColorId: colorId,
 	}
 
-	
 	event, err = srv.Events.Insert("primary", event).Do()
 	if err != nil {
 		log.Fatalf("Unable to create event: %v", err)
