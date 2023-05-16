@@ -17,6 +17,7 @@ events of the user's google calendar`,
 }
 
 func init() {
+	
 	rootCmd.AddCommand(listCmd)
 
 }

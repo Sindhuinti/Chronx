@@ -6,7 +6,6 @@ import (
 	"log"
 	"time"
 
-	//"github.com/gookit/color"
 	"google.golang.org/api/calendar/v3"
 	"google.golang.org/api/option"
 )
@@ -40,8 +39,8 @@ func GetEvents() {
 			if err != nil {
 				log.Fatalf("Unable to parse start time: %v", err)
 			}
-			//circle := "\u25cf"
-    		
+			
+    	
 			fmt.Printf("%v - %s\n", event.Summary, start.Format("15:04"))
 		}
 	}
