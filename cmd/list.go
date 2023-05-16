@@ -22,6 +22,8 @@ events of the user's google calendar`,
 			pkg.GetOneEvent(list)
 		}
 	},
+	Example: `chronx list
+chronx list -l "Visit park`,
 }
 
 func init() {
