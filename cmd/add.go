@@ -23,6 +23,8 @@ by passing arguments like Title, description, start time, end time, event links 
 		
 		pkg.AddEvent(title,description,colorId,start,end)
 	},
+	Example: `chronx add -t "Visit Park" -s "2023-05-16 18:00:00"\
+-e "2023-05-16 19:00:00" -i "2" -d "Visit the park by 6pm"` ,
 }
 
 func init() {
