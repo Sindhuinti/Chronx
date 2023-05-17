@@ -22,8 +22,6 @@ func GetClient() (*http.Client, error) {
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println(err)
-		return nil, err
-
 	}
 
 	clientID := os.Getenv("ID")
