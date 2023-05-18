@@ -55,6 +55,20 @@ version      get version of the tool
 
 ### Login information
 
+OAuth2 is used for authenticating with your Google account. The resulting token is placed in the `%LOCALPATH%\chronxToken` file in windows and `/tmp/chronxToken` file in linux (or) macOS. When you first start chronx using  `chronx init` command, the authentication process will proceed. Simply follow the instructions.
+
+You currently have to use your own Calendar API token. Our Calendar API token is restricted to few users only and waits for Google's approval to be unlocked.
+
+1. [Create a New Project](https://console.cloud.google.com/projectcreate) within the Google developer console
+2. Enable the [Google Calendar API](https://console.cloud.google.com/apis/api/calendar-json.googleapis.com)
+3. [Create OAuth2 consent screen](https://console.cloud.google.com/apis/credentials/consent/edit;newAppInternalUser=false) for an "Desktop Application".
+4. [Create OAuth Client ID](https://console.cloud.google.com/apis/credentials/oauthclient)
+5. Grab your newly created Client ID and Client Secret from the Credentials page.
+6. Set these google credientials as Environmental varibales in your system and call `chronx init` command.
+> **Note** ClientID as `CHRONXID` and client secret as `CHRONXSECRET`
+
+7. This should provide with a link to open it in your default browser.
+
 ## License
 This project is licensed under the Apache-2.0 license - see the [LICENSE](https://github.com/Sindhuinti/chronx/blob/main/LICENSE) file for details.
 
