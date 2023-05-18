@@ -13,7 +13,7 @@ var rootCmd = &cobra.Command{
 	CompletionOptions: cobra.CompletionOptions{
 		DisableDefaultCmd: true,
 	},
-	Version: "1.0.0",
+	Version: "1.2.0",
 }
 
 func Execute() {

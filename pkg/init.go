@@ -9,7 +9,6 @@ import (
 	"runtime"
 
 	"github.com/fatih/color"
-	"github.com/joho/godotenv"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -19,14 +18,9 @@ var tokenStash string
 func GetClient() (*http.Client, error) {
 	getOS()
 
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	clientID := os.Getenv("ID")
-	clientSecret := os.Getenv("SECRET")
-	redirectURL := os.Getenv("URL")
+	clientID := os.Getenv("CHRONXID")
+	clientSecret := os.Getenv("CHRONXSECRET")
+	redirectURL := "urn:ietf:wg:oauth:2.0:oob"
 
 	config := &oauth2.Config{
 		ClientID:     clientID,
