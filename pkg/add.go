@@ -11,18 +11,23 @@ import (
 )
 
 func AddEvent(title string, description string, colorId string, start string, end string) {
+
 	client, err := GetClient()
+
 	if err != nil {
 		return
 	}
+	
 	ctx := context.Background()
 	srv, err := calendar.NewService(ctx, option.WithHTTPClient(client))
+
 	if err != nil {
 		log.Fatalf("Unable to create Calendar service: %v", err)
 	}
 
 	var startTime, endTime time.Time
 	var err1, err2 error
+
 	if start == "" && end != "" {
 		fmt.Println("Please enter start time")
 		return
@@ -56,6 +61,7 @@ func AddEvent(title string, description string, colorId string, start string, en
 	}
 
 	event, err = srv.Events.Insert("primary", event).Do()
+	
 	if err != nil {
 		log.Fatalf("Unable to create event: %v", err)
 	}
