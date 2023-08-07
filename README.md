@@ -1,6 +1,9 @@
 # Chronx
 <div align="center">
 <img src="./logo.png" width="300px">
+
+![GitHub](https://img.shields.io/github/license/sindhuinti/chronx) ![GitHub last commit](https://img.shields.io/github/last-commit/sindhuinti/chronx)
+[![Go-reference](https://pkg.go.dev/badge/github.com/Sindhuinti/kubebrew.svg)](https://pkg.go.dev/github.com/Sindhuinti/chronx)
 </div>
 
 Chronx is a command line tool that allows you to access your Google Calendar(s) from a command line. It's easy to get your events, search for events, add new events, delete events. from your terminal without any extra clicks. 
