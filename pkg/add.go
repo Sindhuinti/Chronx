@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"regexp"
 	"time"
 
 	"google.golang.org/api/calendar/v3"
@@ -29,16 +30,31 @@ func AddEvent(title string, description string, colorId string, start string, en
 	var err1, err2 error
 
 	if start == "" && end != "" {
+
 		fmt.Println("Please enter start time")
 		return
-	} else if start != "" && end == "" {
+	} else if start != ""  {
+
+		pattern := `^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$`
+
+		re := regexp.MustCompile(pattern)
+
+		if re.MatchString(start){
+
+			currDate := time.Now().Format("2006-01-02")
+			start = currDate +" "+ start
+			
+		}
 		startTime, err1 = time.Parse("2006-01-02 15:04:05", start)
 		if err1 != nil {
 			fmt.Println("Please enter correct time")
 			return
 		}
-		endTime = startTime.Add(1 * time.Hour)
+		if end==""{
+			endTime = startTime.Add(1 * time.Hour)
+		}
 	} else {
+		fmt.Println(start)
 		startTime, err1 = time.Parse("2006-01-02 15:04:05", start)
 		endTime, err2 = time.Parse("2006-01-02 15:04:05", end)
 	}
